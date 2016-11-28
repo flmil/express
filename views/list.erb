@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<title>タイトル</title>
+	</head>
+	<body>
+
+		<script>
+window.onload = function() {
+	$(".station").click(function() {
+		var line = $(".line",this).text();
+		var name = $(".name",this).text();
+		$.ajax( "/api/station", {
+			type: "GET",
+			data: {"line": line, "name": name},
+			datatype: 'json'
+		})
+		.done(function(json) {
+			$("#detail .next").text(json["next"])
+			$("#derail .prev").text(json["prev"])
+		});
+	});
+}
+		</script>
+
+		<table>
+			<tr>
+				<td></td>
+				<td>近い駅</td>
+				<td>次の駅</td>
+				<td>前の駅</td>
+			</tr>
+
+			<% @stations.each do |station| %>
+				<tr class="station">
+					<td class="line"><%= station["line"] %></td>
+					<td class="name"><%= station["name"] %></td>
+					<td class="next"><%= station["next"] %></td>
+					<td class="prev"><%= station["prev"] %></td>
+				</tr>
+			<% end %>
+		</table>
+
+		<div id="detail">
+			<h2>次の駅<h2>
+
+					<div class="next"></div>
+		</div>
+		<div id="detail">
+			<h2>前の駅<h2>
+
+					<div class="prev"></div>
+		</div>
+
+	</body>
+</html>

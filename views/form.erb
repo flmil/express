@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>タイトル</title>
+	</head>
+	<body>
+		<table>
+			<form action="list" method="get">
+				<input type="text" name="x" id="x" placeholder="x" />
+				<input type="text" name="y" id="y" placeholder="y" />
+				<input type="submit" value="search" />
+			</form>
+		</table>
+		<h2>検索履歴</h2>
+		<table>
+			<% @histories.order('id DESC').each do |history| %>
+				<tr>
+					<th>
+						<%= history.x %>,<%= history.y %>
+					</th>
+					<th>
+						<% if history.favorite %>
+
+							<form action="<%= history.id %>/update" method="post">
+								<input type="submit" value="解除">
+							</form>
+						<% else %>
+
+							<form action="<%= history.id %>/update" method="post">
+								<input type="submit" value="お気に入り">
+							</form>
+						<% end %>
+					</th>
+					<th>
+						<form action="<%= history.id %>/delete" method="post">
+							<input type="submit" value="削除">
+						</form>
+					</th>
+				</tr>
+			<% end %>
+		</table>
+	</body>
+</html>
