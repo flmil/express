@@ -39,7 +39,7 @@ end
 
 post '/:id/update' do
 	history = History.find(params[:id])
-	history,favorite = !history.favorite
+	history.favorite = !history.favorite
 	history.save
 	redirect "/"
 end
@@ -56,7 +56,7 @@ get '/api/station' do
 	res = Net::HTTP.get_response(uri)
 	json = JSON.parse(res.body)
 
-	response = {
+	p response = {
 		next: json["response"]["station"][0]["next"],
 		prev: json["response"]["station"][0]["prev"]
 	}

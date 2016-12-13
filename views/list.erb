@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<title>検索結果</title>
+
+
 	</head>
 	<body>
 
@@ -18,8 +20,8 @@ window.onload = function() {
 			datatype: 'json'
 		})
 		.done(function(json) {
-			$("#detail .next").text(json["next"])
-			$("#derail .prev").text(json["prev"])
+			$("#detail .next").text(json["next"]),
+			$("#detail .prev").text(json["prev"])
 		});
 	});
 }
@@ -45,12 +47,8 @@ window.onload = function() {
 
 		<div id="detail">
 			<h2>次の駅<h2>
-
 					<div class="next"></div>
-		</div>
-		<div id="detail">
 			<h2>前の駅<h2>
-
 					<div class="prev"></div>
 		</div>
 
